@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema Financeiro Associação</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Sistema Financeiro - Associação de Transporte</h1>
+
+<section class="card">
+<h2>1. Dados Gerais</h2>
+
+<label>Mês de Referência:</label>
+<input type="month" id="mes">
+
+<label>Valor do Auxílio Total (R$):</label>
+<input type="number" id="auxilio">
+
+<label>Quantidade de Veículos:</label>
+<input type="number" id="qtdVeiculos">
+
+<button onclick="gerarCamposVeiculos()">Gerar Veículos</button>
+
+<div id="veiculosContainer"></div>
+
+<label>Alunos Integrais:</label>
+<input type="number" id="alunosIntegrais">
+
+<label>Alunos com Desconto:</label>
+<input type="number" id="alunosDesconto">
+
+<button onclick="calcular()">Calcular</button>
+</section>
+
+<section class="card">
+<h2>2. Resultado</h2>
+<div id="resultado"></div>
+<button onclick="salvarMes()">Salvar Mês</button>
+<button onclick="exportarJSON()">Exportar Dados</button>
+</section>
+
+<section class="card">
+<h2>3. Histórico Mensal</h2>
+<div id="historico"></div>
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>
