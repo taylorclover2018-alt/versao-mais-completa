@@ -1,0 +1,54 @@
+body {
+font-family: Arial, sans-serif;
+background: #f4f4f4;
+margin: 0;
+padding: 20px;
+}
+
+h1 {
+text-align: center;
+}
+
+.card {
+background: white;
+padding: 20px;
+margin-bottom: 20px;
+border-radius: 8px;
+box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+label {
+display: block;
+margin-top: 10px;
+}
+
+input {
+width: 100%;
+padding: 6px;
+margin-top: 4px;
+}
+
+button {
+margin-top: 15px;
+padding: 8px 15px;
+cursor: pointer;
+}
+
+.veiculo {
+border: 1px solid #ddd;
+padding: 10px;
+margin-top: 10px;
+border-radius: 6px;
+}
+
+.resultado-box {
+background: #fafafa;
+padding: 10px;
+margin-top: 10px;
+border-radius: 6px;
+}
+
+.item-historico {
+border-bottom: 1px solid #ccc;
+padding: 8px 0;
+}
