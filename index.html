@@ -1,52 +1,210 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sistema Financeiro Associação</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transporte Associação | Sistema Premium</title>
+    
+    <!-- Fontes e Ícones -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4361ee">
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
+    <div class="theme-toggle">
+        <i class="fas fa-moon"></i>
+    </div>
 
-<h1>Sistema Financeiro - Associação de Transporte</h1>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <div class="header-left">
+                    <i class="fas fa-bus header-icon"></i>
+                    <h1>Fechamento Transporte</h1>
+                </div>
+                <div class="header-right">
+                    <span class="badge">Premium</span>
+                </div>
+            </div>
+            <p class="header-subtitle">Sistema profissional de rateio e gestão de transporte</p>
+        </header>
 
-<section class="card">
-<h2>1. Dados Gerais</h2>
+        <div class="card card-premium auxilio-card">
+            <div class="card-header">
+                <i class="fas fa-hand-holding-usd"></i>
+                <h3>Configuração Geral</h3>
+            </div>
+            <div class="card-body">
+                <div class="input-group">
+                    <label for="auxilioTotal">
+                        <i class="fas fa-money-bill-wave"></i>
+                        Auxílio Total (R$)
+                    </label>
+                    <input type="number" id="auxilioTotal" value="4000" step="0.01" min="0">
+                </div>
+            </div>
+        </div>
 
-<label>Mês de Referência:</label>
-<input type="month" id="mes">
+        <div class="rotas-container">
+            <!-- Rota 7 Lagoas -->
+            <div class="card card-premium rota-card" data-rota="0">
+                <div class="card-header">
+                    <div class="rota-title">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Rota 7 Lagoas</h3>
+                    </div>
+                    <span class="rota-badge">Norte</span>
+                </div>
+                
+                <div class="card-body">
+                    <div class="alunos-section">
+                        <h4><i class="fas fa-users"></i> Alunos</h4>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label>Integrais</label>
+                                <input type="number" id="integral0" value="12" min="0">
+                            </div>
+                            <div class="input-group">
+                                <label>50%</label>
+                                <input type="number" id="desc0" value="2" min="0">
+                            </div>
+                        </div>
+                    </div>
 
-<label>Valor do Auxílio Total (R$):</label>
-<input type="number" id="auxilio">
+                    <div class="passagens-section">
+                        <h4><i class="fas fa-ticket-alt"></i> Passagens</h4>
+                        <div class="input-group">
+                            <label>Valor arrecadado (R$)</label>
+                            <input type="number" id="passagens0" value="0" step="0.01" min="0">
+                        </div>
+                    </div>
 
-<label>Quantidade de Veículos:</label>
-<input type="number" id="qtdVeiculos">
+                    <div class="veiculos-section">
+                        <div class="veiculos-header">
+                            <h4><i class="fas fa-truck"></i> Veículos</h4>
+                            <div class="veiculos-control">
+                                <label>Quantidade:</label>
+                                <input type="number" min="0" value="1" class="veiculo-qtd" onchange="gerarVeiculos(0,this.value)">
+                            </div>
+                        </div>
+                        <div id="veiculos0" class="veiculos-container"></div>
+                    </div>
+                </div>
+            </div>
 
-<button onclick="gerarCamposVeiculos()">Gerar Veículos</button>
+            <!-- Rota Curvelo -->
+            <div class="card card-premium rota-card" data-rota="1">
+                <div class="card-header">
+                    <div class="rota-title">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Rota Curvelo</h3>
+                    </div>
+                    <span class="rota-badge">Sul</span>
+                </div>
+                
+                <div class="card-body">
+                    <div class="alunos-section">
+                        <h4><i class="fas fa-users"></i> Alunos</h4>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label>Integrais</label>
+                                <input type="number" id="integral1" value="12" min="0">
+                            </div>
+                            <div class="input-group">
+                                <label>50%</label>
+                                <input type="number" id="desc1" value="2" min="0">
+                            </div>
+                        </div>
+                    </div>
 
-<div id="veiculosContainer"></div>
+                    <div class="passagens-section">
+                        <h4><i class="fas fa-ticket-alt"></i> Passagens</h4>
+                        <div class="input-group">
+                            <label>Valor arrecadado (R$)</label>
+                            <input type="number" id="passagens1" value="0" step="0.01" min="0">
+                        </div>
+                    </div>
 
-<label>Alunos Integrais:</label>
-<input type="number" id="alunosIntegrais">
+                    <div class="veiculos-section">
+                        <div class="veiculos-header">
+                            <h4><i class="fas fa-truck"></i> Veículos</h4>
+                            <div class="veiculos-control">
+                                <label>Quantidade:</label>
+                                <input type="number" min="0" value="1" class="veiculo-qtd" onchange="gerarVeiculos(1,this.value)">
+                            </div>
+                        </div>
+                        <div id="veiculos1" class="veiculos-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<label>Alunos com Desconto:</label>
-<input type="number" id="alunosDesconto">
+        <div class="actions">
+            <button class="btn btn-primary" onclick="calcular()">
+                <i class="fas fa-calculator"></i>
+                Calcular Rateio
+            </button>
+            <button class="btn btn-secondary" onclick="gerarPDF()">
+                <i class="fas fa-file-pdf"></i>
+                Gerar PDF Premium
+            </button>
+            <button class="btn btn-outline" onclick="resetarTudo()">
+                <i class="fas fa-redo-alt"></i>
+                Resetar
+            </button>
+        </div>
 
-<button onclick="calcular()">Calcular</button>
-</section>
+        <!-- Tabela de Resultados -->
+        <div class="card card-premium resultado-card">
+            <div class="card-header">
+                <i class="fas fa-chart-bar"></i>
+                <h3>Resultado do Rateio</h3>
+            </div>
+            <div class="card-body">
+                <table id="tabelaResultado" class="premium-table">
+                    <thead>
+                        <tr>
+                            <th>Rota</th>
+                            <th>Total Bruto</th>
+                            <th>Auxílio</th>
+                            <th>Passagens</th>
+                            <th>Total a Ratear</th>
+                            <th>Integral</th>
+                            <th>50%</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
 
-<section class="card">
-<h2>2. Resultado</h2>
-<div id="resultado"></div>
-<button onclick="salvarMes()">Salvar Mês</button>
-<button onclick="exportarJSON()">Exportar Dados</button>
-</section>
+        <!-- Gráfico -->
+        <div class="card card-premium grafico-card">
+            <div class="card-header">
+                <i class="fas fa-chart-pie"></i>
+                <h3>Visualização Gráfica</h3>
+            </div>
+            <div class="card-body">
+                <div class="grafico-container">
+                    <canvas id="graficoRateio"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<section class="card">
-<h2>3. Histórico Mensal</h2>
-<div id="historico"></div>
-</section>
+    <!-- Toast de notificação -->
+    <div class="toast-notification" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span>Cálculo realizado com sucesso!</span>
+    </div>
 
-<script src="app.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
