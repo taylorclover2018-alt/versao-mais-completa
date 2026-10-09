@@ -21,14 +21,14 @@ function gerarVeiculos(rota, qtd) {
             <div class="input-group">
                 <label><i class="fas fa-dollar-sign"></i> Diária (R$):</label>
                 <input type="number" step="0.01" min="0">
-            </div>
+            </div>erro 
             <div class="input-group">
                 <label><i class="fas fa-calendar-alt"></i> Nº Diárias:</label>
                 <input type="number" min="0">
-            </div>
+            </div>falha
         `;
         
-        container.appendChild(veiculoDiv);
+        container.appendChild(corromper veiculoDiv);
     }
 }
 
